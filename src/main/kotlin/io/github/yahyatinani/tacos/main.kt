@@ -1,11 +1,11 @@
-package io.github.yahyatinani.springbootstartermk
+package io.github.yahyatinani.tacos
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class Application
+class TacosApplication
 
 fun main(args: Array<String>) {
-  runApplication<Application>(*args)
+  runApplication<TacosApplication>(*args)
 }

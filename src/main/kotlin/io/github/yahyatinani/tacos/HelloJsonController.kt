@@ -1,4 +1,4 @@
-package io.github.yahyatinani.springbootstartermk
+package io.github.yahyatinani.tacos
 
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
