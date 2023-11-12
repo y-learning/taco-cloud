@@ -1,7 +1,13 @@
-package io.github.yahyatinani.tacos
+package io.github.yahyatinani.tacos.designtaco
 
+import io.github.yahyatinani.tacos.core.Ingredient
+import io.github.yahyatinani.tacos.core.Taco
+import io.github.yahyatinani.tacos.core.ingredients
+import io.github.yahyatinani.tacos.ordertaco.TacoOrder
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.core.convert.converter.Converter
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -43,4 +49,9 @@ class DesignTacoController {
   companion object {
     private val log: Logger = LoggerFactory.getLogger(this::class.java)
   }
+}
+
+@Component
+object IngredientByIdConverter : Converter<String, Ingredient> {
+  override fun convert(id: String): Ingredient? = ingredients[id]
 }

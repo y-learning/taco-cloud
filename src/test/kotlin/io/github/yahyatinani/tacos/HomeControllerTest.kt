@@ -1,5 +1,6 @@
 package io.github.yahyatinani.tacos
 
+import io.github.yahyatinani.tacos.home.HomeController
 import org.hamcrest.Matchers.containsString
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

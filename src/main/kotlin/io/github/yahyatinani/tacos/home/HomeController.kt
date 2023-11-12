@@ -1,4 +1,4 @@
-package io.github.yahyatinani.tacos
+package io.github.yahyatinani.tacos.home
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
