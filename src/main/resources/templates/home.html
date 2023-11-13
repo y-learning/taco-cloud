@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Taco Cloud</title>
-</head>
 
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
 <body>
 <h1>Welcome to...</h1>
-<img th:src="@{/images/TacoCloud.jpg}" alt="logo" th:width="300"/>
+<img src="/images/TacoCloud.jpg" alt="logo" width="300"/>
 
 <div>
-  <a th:href="@{/design}">Design you delicious Taco!</a>
+  <a href="/design">Design you delicious Taco!</a>
 </div>
 </body>
 </html>

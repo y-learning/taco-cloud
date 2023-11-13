@@ -1,84 +1,86 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Taco Design Form</title>
-  <link rel="stylesheet" th:href="@{/styles.css}"/>
-
-  <script type="text/javascript"
-          th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+  <link rel="stylesheet" href="/styles.css"/>
 </head>
-
 <body>
-<h1>Design your taco!</h1>
-<img th:src="@{/images/TacoCloud.jpg}" alt="logo" th:width="300"/>
+<h1>Design your delicious taco 🌮</h1>
+<img src="/images/TacoCloud.jpg" alt="logo" width="300"/>
 
-<form method="POST" th:object="${taco}">
-  <!-- end::all[] -->
+<form name="taco" method="post">
+  {{#ingredientsError}}
+  <span class="validationError">{{ingredientsError}}</span>
+  {{/ingredientsError}}
 
-  <span class="validationError"
-        th:if="${#fields.hasErrors('ingredients')}"
-        th:errors="*{ingredients}">Ingredient Error</span>
-
-  <!-- tag::all[] -->
   <div class="grid">
     <div class="ingredient-group" id="wraps">
       <h3>Designate your wrap:</h3>
-      <div th:each="ingredient : ${wrap}">
-        <input th:field="*{ingredients}" type="checkbox"
-               th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+      {{#wrap}}
+      <div>
+        <label><input name="ingredients" type="checkbox"
+                      value="{{id}}"/></label>
+        <span>{{name}}</span><br/>
       </div>
+      {{/wrap}}
     </div>
 
     <div class="ingredient-group" id="proteins">
       <h3>Pick your protein:</h3>
-      <div th:each="ingredient : ${protein}">
-        <input th:field="*{ingredients}" type="checkbox"
-               th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+      {{#protein}}
+      <div>
+        <label><input name="ingredients" type="checkbox"
+                      value="{{id}}"/></label>
+        <span>{{name}}</span><br/>
       </div>
+      {{/protein}}
     </div>
 
     <div class="ingredient-group" id="cheeses">
       <h3>Choose your cheese:</h3>
-      <div th:each="ingredient : ${cheese}">
-        <input th:field="*{ingredients}" type="checkbox"
-               th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+      {{#cheese}}
+      <div>
+        <label><input name="ingredients" type="checkbox"
+                      value="{{id}}"/></label>
+        <span>{{name}}</span><br/>
       </div>
+      {{/cheese}}
     </div>
 
     <div class="ingredient-group" id="veggies">
       <h3>Determine your veggies:</h3>
-      <div th:each="ingredient : ${veggies}">
-        <input th:field="*{ingredients}" type="checkbox"
-               th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+      {{#veggies}}
+      <div>
+        <label><input name="ingredients" type="checkbox"
+                      value="{{id}}"/></label>
+        <span>{{name}}</span><br/>
       </div>
+      {{/veggies}}
     </div>
 
     <div class="ingredient-group" id="sauces">
       <h3>Select your sauce:</h3>
-      <div th:each="ingredient : ${sauce}">
-        <input th:field="*{ingredients}" type="checkbox"
-               th:value="${ingredient.id}"/>
-        <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+      {{#sauce}}
+      <div>
+        <label><input name="ingredients" type="checkbox"
+                      value="{{id}}"/></label>
+        <span>{{name}}</span><br/>
       </div>
+      {{/sauce}}
     </div>
   </div>
 
   <div>
     <h3>Name your taco creation:</h3>
-    <input type="text" th:field="*{name}"/>
-    <!-- end::all[] -->
-    <span class="validationError"
-          th:if="${#fields.hasErrors('name')}"
-          th:errors="*{name}">Name Error</span>
-    <!-- tag::all[] -->
+    <label><input type="text" name="name"
+                  value="{{#taco.name}}{{taco.name}}{{/taco.name}}"
+                  placeholder="Super Taco!"/></label>
+    {{#nameError}}
+    <span class="validationError">{{nameError}}</span>
+    {{/nameError}}
     <br/>
-
+    <br/>
     <button>Submit Your Taco</button>
   </div>
 </form>

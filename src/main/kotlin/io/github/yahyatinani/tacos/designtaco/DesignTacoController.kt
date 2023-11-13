@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Controller
-import org.springframework.ui.Model
+import org.springframework.ui.ModelMap
 import org.springframework.ui.set
 import org.springframework.validation.Errors
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,13 +17,18 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.SessionAttributes
+import org.springframework.web.servlet.ModelAndView
+
+fun ModelMap.addErrorsAttributes(errors: Errors) = errors.fieldErrors.forEach {
+  this["${it.field}Error"] = it.defaultMessage
+}
 
 @SessionAttributes("tacoDesigns")
 @RequestMapping("/design")
 @Controller
 class DesignTacoController {
   @ModelAttribute
-  fun addIngredientsModelAttributes(model: Model) {
+  fun addIngredientsModelAttributes(model: ModelMap) {
     model.addAllAttributes(
       ingredients()
         .groupBy { it.type }
@@ -32,33 +37,34 @@ class DesignTacoController {
   }
 
   @ModelAttribute
-  fun addTacoDesignsModelAttribute(model: Model) {
-    if (model.getAttribute("tacoDesigns") == null) {
-      model["tacoDesigns"] = emptyList<Taco>()
+  fun addTacoDesignsModelAttribute(model: ModelMap) {
+    if (model["tacoDesigns"] == null) {
+      model.put("tacoDesigns", emptyList<Taco>())
     }
   }
 
   @GetMapping
-  fun designForm(model: Model): String {
-    model.addAttribute("taco", Taco())
-    return "design"
+  fun designForm(model: ModelMap): ModelAndView {
+    return ModelAndView("design", model)
   }
 
   @PostMapping
   fun processTaco(
-    model: Model,
+    model: ModelMap,
     @Valid taco: Taco,
     errors: Errors,
     @ModelAttribute("tacoDesigns") tacoDesigns: List<Taco>
-  ): String {
+  ): ModelAndView {
     if (errors.hasErrors()) {
-      return "design"
+      model.addErrorsAttributes(errors)
+      log.error("taco errors: {}", errors)
+      return ModelAndView("design")
     }
 
     model["tacoDesigns"] = tacoDesigns + taco
     log.info("Processing taco: {}", taco)
 
-    return "redirect:/orders/current"
+    return ModelAndView("redirect:/orders/current", model)
   }
 
   companion object {
