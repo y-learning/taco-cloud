@@ -1,6 +1,5 @@
 package io.github.yahyatinani.tacos
 
-import io.github.yahyatinani.tacos.home.HomeController
 import org.hamcrest.Matchers.containsString
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,7 +10,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.view
 
-@WebMvcTest(HomeController::class)
+@WebMvcTest
 class HomeControllerTest(@Autowired private val mockMvc: MockMvc) {
   @Test
   fun testHomePage() {
