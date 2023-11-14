@@ -74,7 +74,7 @@
   <div>
     <h3>Name your taco creation:</h3>
     <label><input type="text" name="name"
-                  value="{{#taco.name}}{{taco.name}}{{/taco.name}}"
+                  value="{{#taco}}{{name}}{{/taco}}"
                   placeholder="Super Taco!"/></label>
     {{#nameError}}
     <span class="validationError">{{nameError}}</span>

@@ -1,9 +1,9 @@
 package io.github.yahyatinani.tacos.designtaco
 
+import io.github.yahyatinani.tacos.IngredientRepository
 import io.github.yahyatinani.tacos.core.Ingredient
 import io.github.yahyatinani.tacos.core.Taco
 import io.github.yahyatinani.tacos.core.addErrorsAttributes
-import io.github.yahyatinani.tacos.core.ingredients
 import jakarta.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -23,11 +23,14 @@ import org.springframework.web.servlet.ModelAndView
 @SessionAttributes("tacoDesigns")
 @RequestMapping("/design")
 @Controller
-class DesignTacoController {
+class DesignTacoController(
+  private val ingredientRepository: IngredientRepository
+) {
   @ModelAttribute
   fun addIngredientsModelAttributes(model: ModelMap) {
     model.addAllAttributes(
-      ingredients()
+      ingredientRepository
+        .findAll()
         .groupBy { it.type }
         .mapKeys { "${it.key}".lowercase() }
     )
@@ -41,9 +44,7 @@ class DesignTacoController {
   }
 
   @GetMapping
-  fun designForm(model: ModelMap): ModelAndView {
-    return ModelAndView("design", model)
-  }
+  fun designForm(model: ModelMap) = ModelAndView("design", model)
 
   @PostMapping
   fun processTaco(
@@ -70,6 +71,7 @@ class DesignTacoController {
 }
 
 @Component
-object IngredientByIdConverter : Converter<String, Ingredient> {
-  override fun convert(id: String): Ingredient? = ingredients[id]
+class IngredientByIdConverter(val repository: IngredientRepository) :
+  Converter<String, Ingredient> {
+  override fun convert(id: String): Ingredient? = repository.findBy(id)
 }
