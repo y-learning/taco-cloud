@@ -1,7 +1,7 @@
 package io.github.yahyatinani.tacos.ordertaco
 
 import io.github.yahyatinani.tacos.core.Taco
-import io.github.yahyatinani.tacos.designtaco.addErrorsAttributes
+import io.github.yahyatinani.tacos.core.addErrorsAttributes
 import jakarta.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

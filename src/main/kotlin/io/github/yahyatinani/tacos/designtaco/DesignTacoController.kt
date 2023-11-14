@@ -2,6 +2,7 @@ package io.github.yahyatinani.tacos.designtaco
 
 import io.github.yahyatinani.tacos.core.Ingredient
 import io.github.yahyatinani.tacos.core.Taco
+import io.github.yahyatinani.tacos.core.addErrorsAttributes
 import io.github.yahyatinani.tacos.core.ingredients
 import jakarta.validation.Valid
 import org.slf4j.Logger
@@ -18,10 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.SessionAttributes
 import org.springframework.web.servlet.ModelAndView
-
-fun ModelMap.addErrorsAttributes(errors: Errors) = errors.fieldErrors.forEach {
-  this["${it.field}Error"] = it.defaultMessage
-}
 
 @SessionAttributes("tacoDesigns")
 @RequestMapping("/design")
