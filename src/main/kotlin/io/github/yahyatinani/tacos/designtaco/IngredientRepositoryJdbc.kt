@@ -30,6 +30,10 @@ class IngredientRepositoryJdbc(val jdbcTemplate: JdbcTemplate) :
     return ingredient
   }
 
+  override fun deleteAll() {
+    jdbcTemplate.update("delete from ingredient")
+  }
+
   companion object {
     fun toIngredient(rs: ResultSet): Ingredient = Ingredient(
       id = rs.getString("id"),
