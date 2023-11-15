@@ -2,7 +2,7 @@ delete
 from order_taco;
 
 delete
-from "order";
+from order_details;
 
 delete
 from taco_ingredient;

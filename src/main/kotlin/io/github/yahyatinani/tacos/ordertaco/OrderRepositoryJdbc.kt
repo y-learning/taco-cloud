@@ -64,7 +64,7 @@ class OrderRepositoryJdbc(val jdbcTemplate: JdbcTemplate) : OrderRepository {
   @Transactional
   override fun save(order: TacoOrder): TacoOrder {
     val sql = """
-      insert into "order" 
+      insert into order_details 
       (delivery_name, delivery_street, delivery_city, delivery_state, 
        delivery_zip, cc_number, cc_expiration, cc_cvv, placed_at)
       values (?,?,?,?,?,?,?,?,?)

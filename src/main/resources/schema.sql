@@ -9,18 +9,21 @@ create table if not exists ingredient
 (
     id   varchar(4)  not null,
     name varchar(25) not null,
-    type varchar(10) not null
+    type varchar(10) not null,
+    PRIMARY KEY (id)
 );
 
 create table if not exists taco_ingredient
 (
     id            identity,
     taco_id       bigint,
-    ingredient_id varchar(4)  not null,
-    order_key     int
+    ingredient_id varchar(4) not null,
+    order_key     int,
+    foreign key (taco_id) references taco,
+    foreign key (ingredient_id) references ingredient
 );
 
-create table if not exists "order"
+create table if not exists order_details
 (
     id              identity,
     delivery_Name   varchar(50) not null,
@@ -38,5 +41,7 @@ create table if not exists order_taco
 (
     id       identity,
     order_id bigint,
-    taco_id  bigint
+    taco_id  bigint,
+    foreign key (order_id) references order_details,
+    foreign key (taco_id) references taco
 );
