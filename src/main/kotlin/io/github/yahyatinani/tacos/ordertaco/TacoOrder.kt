@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Digits
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import org.hibernate.validator.constraints.CreditCardNumber
+import org.hibernate.validator.constraints.Length
 import java.io.Serializable
 import java.util.Date
 
@@ -21,6 +22,7 @@ data class TacoOrder(
   var deliveryCity: String,
 
   @field:NotBlank(message = "State is required")
+  @field:Length(min = 2, max = 2)
   var deliveryState: String,
 
   @field:NotBlank(message = "Zip code is required")

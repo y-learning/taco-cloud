@@ -1,4 +1,4 @@
-package io.github.yahyatinani.tacos
+package io.github.yahyatinani.tacos.designtaco
 
 import io.github.yahyatinani.tacos.core.Ingredient
 

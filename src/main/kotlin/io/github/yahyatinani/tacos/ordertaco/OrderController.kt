@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView
 @SessionAttributes("tacoDesigns", "tacoOrder")
 @RequestMapping("/orders")
 @Controller
-class OrderController {
+class OrderController(val orderRepository: OrderRepository) {
   @ModelAttribute
   fun addTacoOrderModelAttribute(
     model: Model,
@@ -43,11 +43,10 @@ class OrderController {
   ): ModelAndView {
     if (errors.hasErrors()) {
       model.addErrorsAttributes(errors)
-      log.error("order errors: {}", errors)
       return ModelAndView("order_form", model)
     }
 
-    log.info("Order submitted: {}", order)
+    orderRepository.save(order)
     sessionStatus.setComplete()
 
     return ModelAndView("redirect:/", model)

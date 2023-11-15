@@ -1,6 +1,5 @@
 package io.github.yahyatinani.tacos.designtaco
 
-import io.github.yahyatinani.tacos.IngredientRepository
 import io.github.yahyatinani.tacos.core.Ingredient
 import io.github.yahyatinani.tacos.core.Taco
 import io.github.yahyatinani.tacos.core.addErrorsAttributes

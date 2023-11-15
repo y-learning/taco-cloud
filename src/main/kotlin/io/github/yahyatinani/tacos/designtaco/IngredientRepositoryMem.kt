@@ -1,10 +1,9 @@
-package io.github.yahyatinani.tacos
+package io.github.yahyatinani.tacos.designtaco
 
 import io.github.yahyatinani.tacos.core.Ingredient
-import org.springframework.stereotype.Repository
 
-@Repository
-class MemIngredientRepository : IngredientRepository {
+//@Repository
+class IngredientRepositoryMem : IngredientRepository {
   override fun findAll(): Iterable<Ingredient> = ingredients.values
 
   override fun findBy(id: String): Ingredient? = ingredients[id]
